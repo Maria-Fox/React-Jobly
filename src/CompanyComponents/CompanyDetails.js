@@ -22,12 +22,11 @@ const CompanyDetails = () => {
     getCoDetails();
   }, [companyHandle]);
 
-  
 
   return(
     <div>
       <p>details here</p>
-      <p>{targetCompany.name}</p>
+      {targetCompany ? <h1>{targetCompany.name}</h1> : <p>Loading...</p> }
     </div>
   )
 }
