@@ -38,24 +38,29 @@ class JoblyApi {
   // Individual API routes
 
   // ** Comapny All comapnies
+//  Can filter on provided search filters:
+//  * - minEmployees
+//  * - maxEmployees
+//  * - nameLike (will find case-insensitive, partial matches)
 
-  static async getCompanies() {
-    let res = await this.request(`companies`);
+  static async getCompanies(data = {}) {
+    let res = await this.request(`companies/`, data);
     return res.companies;
   };
 
   /** Get details on a company by handle. */
 
-  static async getCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
-    return res;
+  static async getCompany(handle, data = {}) {
+    let res = await this.request(`companies/${handle}`, data);
+    console.log(res)
+    return res.company;
   };
 
   // get all jobs
 
   static async getJobs() {
     let res = await this.request(`jobs`);
-    return res.company;
+    return res.jobs;
   };
 
   // get certain job

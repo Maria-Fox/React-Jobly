@@ -4,6 +4,7 @@ import WelcomePage from "./WelcomePage";
 import CompanyList from "./CompanyComponents/CompanyList";
 import CompanyCard from "./CompanyComponents/CompanyCard";
 import CompanyDetails from "./CompanyComponents/CompanyDetails"
+import JobList from "./JobComponents/JobList";
 
 const NavRoutes = () => {
   return(
@@ -26,7 +27,7 @@ const NavRoutes = () => {
 
       <Route 
         path = "jobs"
-        element = {<h1>jobs pg</h1>}
+        element = {<JobList />}
       /> 
 
       <Route 
