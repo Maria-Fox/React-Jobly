@@ -63,7 +63,7 @@ class JoblyApi {
     return res.jobs;
   };
 
-  // get certain job
+  // get given job via id
 
   static async getJobID(jobId) {
     let res = await this.request(`jobs/${jobId}`);

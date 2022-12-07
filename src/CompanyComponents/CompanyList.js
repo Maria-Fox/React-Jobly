@@ -22,12 +22,21 @@ const CompanyList = () => {
     // console.log(searchTerm)
   };
 
-  const handleSubmit = async function requestWithFilters (e) {
+  // {searchFor} creates query structure in URL bar.
+  const handleSubmit = async function requestWithFilters (e, {searchFor}) {
       e.preventDefault();
-      console.log(searchTerm)
-      let res = await JoblyApi.getCompany({name : searchTerm});
-      console.log(res);
+      console.log(searchTerm, typeof searchFor)
+      // let res = await JoblyApi.getCompany(searchTerm);
+      // console.log(await JoblyApi.getCompany(searchTerm));
+      try {
+        // sending as object to fit data structure in route
+        let companies = await JoblyApi.getCompanies({q : searchTerm});
+        console.log(companies)
+      } catch (e){
+        console.log(e);
+      }
   };
+
 
   let searchBar = <div>
     <form htmlFor = "searchTerm" onSubmit = {handleSubmit}>
@@ -36,14 +45,15 @@ const CompanyList = () => {
         type= "text"
         id = "searchTerm"
         name = "searchTerm"
-        value = {searchTerm.filter}
+        value = {searchTerm}
         onChange = {handleChange}
         placeholder = "Company Name"
+        required
         >
         </input>
       </label>
 
-      <button>Submit</button>
+      <button>Search</button>
     </form>
   </div>
 
@@ -55,6 +65,7 @@ const CompanyList = () => {
 
       <h1>View All Companies</h1>
       {companies.map(({handle, name, description, numEmployees, logoUrl }) => <CompanyCard 
+        key = {handle}
         handle = {handle} 
         name = {name} 
         description = {description} 

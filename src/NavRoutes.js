@@ -31,6 +31,11 @@ const NavRoutes = () => {
       /> 
 
       <Route 
+        path = "jobs"
+        element = {<JobList />}
+      /> 
+
+      <Route 
         path = "/login"
         element = {<h1>login pg</h1>}
       />

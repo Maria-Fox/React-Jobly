@@ -16,6 +16,8 @@
   border: 2px solid black;
   display: flex;
   justify-content: space-evenly;
+  position: sticky;
+  bottom: 92%;
 }
 
 /* .NavBar-item{

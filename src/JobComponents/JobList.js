@@ -5,32 +5,71 @@ import JobCard from "./JobCard";
 const JobList = () => {
 
   let [jobList, setJobList] = useState(null);
+  let [searchTerm, setSearchTerm] = useState("");
 
   useEffect(function requestAllJobs () {
+    console.log("mount");
     async function getAllJobs(){
       // setJobList(await JoblyApi.getJobs());
 
-    let res = await JoblyApi.getJobs();
-    console.log(res);
-    setJobList(res);
-    console.log(jobList);
+    let allJobs = await JoblyApi.getJobs();
+    // console.log(res);
+    setJobList(allJobs);
+    console.log("effect ran")
+    // console.log(jobList);
     }
     getAllJobs();
   }, []);
 
+  let handleChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  let handleSubmit = async (e, {searchFor}) => {
+    e.preventDefault();
+    try{
+      let searchedJob =  await JoblyApi.getCompanies(searchTerm);
+      console.log(searchedJob);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+
+  let searchBar = <div>
+    <form htmlFor = "searchTerm" >
+      <label>
+        <input
+        type= "text"
+        id = "searchTerm"
+        name = "searchTerm"
+        value = {searchTerm}
+        onChange = {handleChange}
+        placeholder = "Job title"
+        required
+        >
+        </input>
+      </label>
+
+      <button>Search</button>
+    </form>
+  </div>
+
+
   return(
     <div>
+      {searchBar}
+
       <p>This is the job list</p>
-      
-      {jobList ? jobList.map(({companyHandle, companyName, equity, id, salary, title}) => {
+      {jobList ? jobList.map(({id, title, salary, equity, companyHandle, companyName}) => 
         <JobCard 
-          companyName = {companyName} 
-          salary = {salary} 
-          equity = {equity}
-          title = {title}
-          companyHandle = {companyHandle}
-          />
-      }) : <p>Loading ...</p>}
+        key = {id} 
+        title = {title} 
+        salary = {salary} 
+        equity = {equity} 
+        companyHandle = {companyHandle} 
+        companyName = {companyName}/>)
+        : <p>Loading...</p> }
       
     </div>
   )

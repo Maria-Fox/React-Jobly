@@ -14,9 +14,9 @@ const CompanyDetails = () => {
   useEffect(function requestCompDetails() {
     async function getCompDetails () {
       
-      let res = await JoblyApi.getCompany(companyHandle);
-      console.log(res)
-      setTargetCompany(res);
+      let company = await JoblyApi.getCompany(companyHandle);
+      console.log(company)
+      setTargetCompany(company);
     }
     getCompDetails();
   }, [companyHandle]);
