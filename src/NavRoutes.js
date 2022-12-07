@@ -5,8 +5,10 @@ import CompanyList from "./CompanyComponents/CompanyList";
 import CompanyCard from "./CompanyComponents/CompanyCard";
 import CompanyDetails from "./CompanyComponents/CompanyDetails"
 import JobList from "./JobComponents/JobList";
+import SignupForm from "./UserComponents.js/SignupForm";
+import LoginForm from "./UserComponents.js/LoginForm";
 
-const NavRoutes = () => {
+const NavRoutes = ({createAccount, login}) => {
   return(
     <Routes>
 
@@ -31,29 +33,19 @@ const NavRoutes = () => {
       /> 
 
       <Route 
-        path = "jobs"
-        element = {<JobList />}
-      /> 
-
-      <Route 
         path = "/login"
-        element = {<h1>login pg</h1>}
+        element = {<LoginForm login = {login}/>}
       />
 
       <Route 
         path = "/signup"
-        element = {<h1>signup pg</h1>}
+        element = {<SignupForm createAccount = {createAccount}/>}
       />
 
       <Route 
         path = "/profile"
         element = {<h1>profile</h1>}
       />
-
-      {/* <Route
-        path = "/companies/:handle"
-        element = {<CompanyJobs />}
-      /> */}
 
 
 
