@@ -1,24 +1,46 @@
-import React from "react";
+import React, {useContext} from "react";
 import {NavLink} from "react-router-dom";
+import UserContext from "./UserComponents.js/UserContext";
 
-const NavBar = () => {
-  return(
-    <nav className = "NavBar-div">
-      <NavLink to = "/" className = "NavBar-item">Home</NavLink>
-      
-      <NavLink to = "/companies" className = "NavBar-item">Companies</NavLink> 
+const NavBar = ({logout}) => {
 
-      <NavLink to = "/jobs" className = "NavBar-item">Jobs</NavLink>
+  // holds a valid user object.
+  let {currentUser} = useContext(UserContext);
 
-      <NavLink to = "/login" className = "NavBar-item">Login</NavLink>
+  if(!currentUser){
+    return(
+        <nav className = "NavBar-div">
+        
+        <NavLink to = "/">Jobly</NavLink>
 
-      <NavLink to = "/signup" className = "NavBar-item">Signup</NavLink>
+        <NavLink to = "/login" className = "NavBar-item">Login</NavLink>
 
-      <NavLink to = "/profile" className = "NavBar-item">Profile</NavLink>
+        <NavLink to = "/signup" className = "NavBar-item">Signup </NavLink>         
+          
+        </nav>
+    )
+  } else {
 
-    </nav>
-    
-  )
+    return(
+      <nav className = "NavBar-div">
+        <NavLink to = "/" className = "NavBar-item">Jobly</NavLink>
+        
+        <NavLink to = "/companies" className = "NavBar-item">Companies</NavLink> 
+  
+        <NavLink to = "/jobs" className = "NavBar-item">Jobs</NavLink>
+  
+        <NavLink to = "/profile" className = "NavBar-item">Profile</NavLink>
+  
+        <NavLink onClick={logout} className = "NavBar-item">Logout</NavLink>
+  
+  
+      </nav>
+    )
+
+  }
+
+
+
 }
 
 export default NavBar;

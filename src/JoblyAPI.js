@@ -74,7 +74,8 @@ class JoblyApi {
 
   static async getUsername(username) {
     let res = await this.request(`users/${username}`);
-    return res.company;
+    console.log(res);
+    return res.user;
   };
 
   static async registerUser(data) {
@@ -86,11 +87,8 @@ class JoblyApi {
   static async signIn(data) {
     let res = await this.request(`auth/token`, data, "post");
     console.log(res);
-  }
-
-
-
-
+    return res;
+  };
 
   // obviously, you'll add a lot here ...
 };
