@@ -70,6 +70,13 @@ class JoblyApi {
     return res.company;
   };
 
+  // unsure why I have to send in an empty object for data.
+  static async applyForJob(username, jobId) {
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
+    console.log(res);
+    return res;
+  };
+
   // get by username if authenticated as admin or given user
 
   static async getUsername(username) {

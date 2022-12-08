@@ -15,8 +15,8 @@ function App() {
   let [currentUser, setCurrentUser] = useState(null);
   // hooked into state + local storage.
   let [token, setToken] = useLocalStorage(jobly_token);
-  // for children components that use the context :
-  // let user = useContext(UserContext);
+
+// ***************************************************************
 
   useEffect(function loadUserInfo() {
 
@@ -24,11 +24,11 @@ function App() {
         try {
           // token pyload is the username and isAdmin prop
           // let { username } = jwt.decode(token);
-          // add token to Api class so it can use it to call the API.
+          // add token to Api class so it can be used to call the API.
           JoblyApi.token = token;
-          // let username = "newnew";
+          // hard coding in newnew as it was a user created in my db.
           let currentUser = await JoblyApi.getUsername("newnew");
-          console.log("thisis the current user:", currentUser)
+          console.log("this is the current user:", currentUser)
           setCurrentUser(currentUser);
           console.log("current user is :", currentUser);
           console.log(token);
@@ -37,17 +37,14 @@ function App() {
           console.error("App loadUserInfo: problem loading", e);
           setCurrentUser(null);
         }
-      // setInfoLoaded(true);
     }
 
-    // set infoLoaded to false while async getCurrentUser runs; once the
-    // data is fetched (or even if an error happens!), this will be set back
-    // to false to control the spinner.
-    // setInfoLoaded(false);
     if(token){
       getCurrentUser();
     }
   }, [token]);
+
+// ***************************************************************
 
   async function createAccount(userData) {
     // should include the new users username, password, firstName, lastName, email
@@ -62,6 +59,7 @@ function App() {
     }
   };
 
+// ***************************************************************
 
   async function login(userCreds) {
     console.log(userCreds);
@@ -76,18 +74,34 @@ function App() {
     
   };
 
+// ***************************************************************
+
   async function logout(user) {
     setCurrentUser(null);
     setToken(null);
     console.log(currentUser, token)
-  }
+  };
+
+// ***************************************************************
+
+  async function handleApply (username, jobId) {
+    // use currentUser.isername (once resovled tokem issues)
+    try {
+      let applied = await JoblyApi.applyForJob(username, jobId)
+      console.log(applied);
+    } catch(err){
+      console.log(err);
+    }
+  };
+
+// ***************************************************************
 
   // check if there is a value in currentUser & token to gage what NavBar should look like.
 
   return (
     <UserContext.Provider value = {currentUser, setCurrentUser}>
       <div className="App">
-          <NavRoutes createAccount = {createAccount} login = {login}/>
+          <NavRoutes createAccount = {createAccount} login = {login} handleApply = {handleApply}/>
           <NavBar logout = {logout}/>
       </div>
     </UserContext.Provider>

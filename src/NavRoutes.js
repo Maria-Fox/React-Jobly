@@ -9,7 +9,7 @@ import SignupForm from "./UserComponents.js/SignupForm";
 import LoginForm from "./UserComponents.js/LoginForm";
 import Profile from "./UserComponents.js/ProfileForm";
 
-const NavRoutes = ({createAccount, login}) => {
+const NavRoutes = ({createAccount, login, handleApply}) => {
   return(
     <Routes>
 
@@ -25,12 +25,12 @@ const NavRoutes = ({createAccount, login}) => {
 
       <Route 
         path = "/companies/:handle"
-        element = {<CompanyDetails/>}
+        element = {<CompanyDetails handleApply = {handleApply}/>}
       />
 
       <Route 
         path = "jobs"
-        element = {<JobList />}
+        element = {<JobList handleApply = {handleApply}/>}
       /> 
 
       <Route 

@@ -45,14 +45,14 @@ const ProfileForm = () => {
     e.preventDefault();
     console.log(formData)
     try {
-      let updatedProfile = await JoblyApi.updateProfile(formData);
+      let updatedProfile = await JoblyApi.updateProfile(currentUser.username, formData);
       console.log(updatedProfile);
       setCurrentUser(updatedProfile);
       console.log("new info is", currentUser);
     } catch (e) {
       setErrors(e);
+      console.log("errors include:", errors)
     }
-    
   }
 
   return(

@@ -22,7 +22,8 @@ const CompanyList = () => {
       }
     }
 
-    if(currentUser){
+    // REMOVE THE ! - ONLY NEGATING TO CONTINUE DEV 
+    if(!currentUser){
       getAllCompanies();
     } else {
       navigate("/login")

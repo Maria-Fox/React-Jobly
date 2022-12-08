@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import JoblyApi from "../JoblyAPI";
 import JobCard from "./JobCard";
+import UserContext from "../UserComponents.js/UserContext";
 
-const JobList = () => {
+const JobList = ({handleApply}) => {
 
   let [jobList, setJobList] = useState(null);
   let [searchTerm, setSearchTerm] = useState("");
+  let {currentUser} = useContext(UserContext);
 
   useEffect(function requestAllJobs () {
     console.log("mount");
@@ -68,7 +70,9 @@ const JobList = () => {
         salary = {salary} 
         equity = {equity} 
         companyHandle = {companyHandle} 
-        companyName = {companyName}/>)
+        companyName = {companyName}
+        handleApply = {() => handleApply(currentUser.username, id)}
+        />)
         : <p>Loading...</p> }
       
     </div>

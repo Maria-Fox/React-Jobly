@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import CompanyCard from "../CompanyComponents/CompanyCard";
 
-const JobCard = ({companyHandle, companyName, equity, id, salary, title}) => {
+const JobCard = ({companyHandle, companyName, equity, id, salary, title, handleApply}) => {
 
   // comeback and work on theapply button when there's auth for app
 
@@ -15,7 +15,7 @@ const JobCard = ({companyHandle, companyName, equity, id, salary, title}) => {
       
       <h2>{title}</h2>
       <h3>Salary: {salary} Equity: {equityUpdated}</h3>
-      <button>Apply</button>
+      <button onClick = {handleApply}>Apply</button>
     </div>
   )
 }
