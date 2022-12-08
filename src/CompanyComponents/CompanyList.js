@@ -23,14 +23,15 @@ const CompanyList = () => {
   };
 
   // {searchFor} creates query structure in URL bar.
-  const handleSubmit = async function requestWithFilters (e, {searchFor}) {
+  async function handleSubmit (e, {searchFor}) {
+      console.log("hello");
       e.preventDefault();
       console.log(searchTerm, typeof searchFor)
       // let res = await JoblyApi.getCompany(searchTerm);
       // console.log(await JoblyApi.getCompany(searchTerm));
       try {
         // sending as object to fit data structure in route
-        let companies = await JoblyApi.getCompanies({q : searchTerm});
+        let companies = await JoblyApi.getCompanies(searchTerm);
         console.log(companies)
       } catch (e){
         console.log(e);

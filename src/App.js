@@ -22,8 +22,8 @@ function App() {
           // let { username } = jwt.decode(token);
           // add token to Api class so it can use it to call the API.
           JoblyApi.token = token;
-          let username = "newnew";
-          let currentUser = await JoblyApi.getUsername(username);
+          // let username = "newnew";
+          let currentUser = await JoblyApi.getUsername("newnew");
           console.log("thisis the current user:", currentUser)
           setCurrentUser(currentUser);
           console.log("current user is :", currentUser);

@@ -7,6 +7,7 @@ import CompanyDetails from "./CompanyComponents/CompanyDetails"
 import JobList from "./JobComponents/JobList";
 import SignupForm from "./UserComponents.js/SignupForm";
 import LoginForm from "./UserComponents.js/LoginForm";
+import Profile from "./UserComponents.js/ProfileForm";
 
 const NavRoutes = ({createAccount, login}) => {
   return(
@@ -44,7 +45,7 @@ const NavRoutes = ({createAccount, login}) => {
 
       <Route 
         path = "/profile"
-        element = {<h1>profile</h1>}
+        element = {<Profile />}
       />
 
 

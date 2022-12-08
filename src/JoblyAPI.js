@@ -90,6 +90,12 @@ class JoblyApi {
     return res;
   };
 
+  static async updateProfile(username, data) {
+    let res = await this.request(`users/${username}`, data, "patch");
+    console.log(res);
+    return res.token;
+  };
+
   // obviously, you'll add a lot here ...
 };
 
