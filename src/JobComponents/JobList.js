@@ -3,7 +3,7 @@ import JoblyApi from "../JoblyAPI";
 import JobCard from "./JobCard";
 import UserContext from "../UserComponents.js/UserContext";
 
-const JobList = ({handleApply}) => {
+const JobList = () => {
 
   let [jobList, setJobList] = useState(null);
   let [searchTerm, setSearchTerm] = useState("");
@@ -36,7 +36,6 @@ const JobList = ({handleApply}) => {
       console.log(e);
     }
   };
-
 
   let searchBar = <div>
     <form htmlFor = "searchTerm" >
@@ -71,7 +70,7 @@ const JobList = ({handleApply}) => {
         equity = {equity} 
         companyHandle = {companyHandle} 
         companyName = {companyName}
-        handleApply = {() => handleApply(currentUser.username, id)}
+        id = {id}
         />)
         : <p>Loading...</p> }
       

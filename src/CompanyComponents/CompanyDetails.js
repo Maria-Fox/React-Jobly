@@ -6,10 +6,10 @@ import JoblyApi from "../JoblyAPI";
 import UserContext from "../UserComponents.js/UserContext";
 import JobCard from "../JobComponents/JobCard";
 
-const CompanyDetails = ({handleApply}) => {
+const CompanyDetails = () => {
 
   let [targetCompany, setTargetCompany] = useState(null);
-  let {currentUser} = useContext(UserContext);
+  let {currentUser, handleApply, didUserPreviouslyApply} = useContext(UserContext);
 
   let companyHandle = useParams();
   companyHandle = companyHandle.handle;
@@ -23,18 +23,8 @@ const CompanyDetails = ({handleApply}) => {
     }
     getCompDetails();
   }, [companyHandle]);
-// can otherwise be an epty array, or changes on companyHandle
 
-  // async function handleApply (username, jobId) {
-  //   // use currentUser.isername (once resovled tokem issues)
-  //   try {
-  //     let applied = await JoblyApi.applyForJob(username, jobId)
-  //   } catch(err){
-  //     console.log(err);
-  //   }
-  // }
-
-
+  // i am returning a JobCard vs. JobList bc the JobList will send another API request, this component already does that. Additionally, it means styling on the JobCard alone instead of multiple places.
   return(
     <div>
       <p>details here</p>
@@ -45,7 +35,7 @@ const CompanyDetails = ({handleApply}) => {
           <p>{targetCompany.description}</p>
 
           <h2>Available Opportunities</h2>
-          <ul>
+
             {targetCompany.jobs.map(({companyHandle, companyName, equity, id, salary, title}) => 
             <JobCard 
             comapnyHandle = {companyHandle} 
@@ -55,12 +45,8 @@ const CompanyDetails = ({handleApply}) => {
             salary = {salary} 
             title = {title}
             key = {id}
-            handleApply = {() => handleApply(currentUser.username, id)}
           />)}
-
-          </ul>
-
-          {/* <button onClick = {() => handleApply()}>Apply</button> */}
+  
     </div> 
     : <p>Loading...</p> }
     </div>

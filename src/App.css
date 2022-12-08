@@ -23,3 +23,13 @@
 /* .NavBar-item{
   flex-direction: ;
 } */
+
+/* JobCard.css */
+
+.applied{
+  background-color: grey;
+}
+
+.not-applied{
+  background-color: aliceblue;
+}

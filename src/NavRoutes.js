@@ -25,12 +25,12 @@ const NavRoutes = ({createAccount, login, handleApply}) => {
 
       <Route 
         path = "/companies/:handle"
-        element = {<CompanyDetails handleApply = {handleApply}/>}
+        element = {<CompanyDetails />}
       />
 
       <Route 
         path = "jobs"
-        element = {<JobList handleApply = {handleApply}/>}
+        element = {<JobList />}
       /> 
 
       <Route 

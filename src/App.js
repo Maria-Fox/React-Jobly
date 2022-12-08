@@ -15,6 +15,7 @@ function App() {
   let [currentUser, setCurrentUser] = useState(null);
   // hooked into state + local storage.
   let [token, setToken] = useLocalStorage(jobly_token);
+  let [appliedJobs , setAppliedJobs] = useState(new Set([]));
 
 // ***************************************************************
 
@@ -84,14 +85,25 @@ function App() {
 
 // ***************************************************************
 
-  async function handleApply (username, jobId) {
+  async function handleApply(jobId) {
     // use currentUser.isername (once resovled tokem issues)
     try {
-      let applied = await JoblyApi.applyForJob(username, jobId)
+      // if the jobId is already in set return/ do not allow to apply
+      if(didUserPreviouslyApply(jobId)) return;
+
+      // otherwise, send the API request and then re-write tate w/ new set.
+    // hardcoding "newnew" as argument for currentUser.username 
+      let applied = await JoblyApi.applyForJob("newnew", jobId);
       console.log(applied);
+      setAppliedJobs(new Set([...appliedJobs, jobId]));
     } catch(err){
       console.log(err);
     }
+  };
+
+  function didUserPreviouslyApply(jobId){
+    // return true or false- if the set already has this job applied for
+    return appliedJobs.has(jobId);
   };
 
 // ***************************************************************
@@ -99,13 +111,13 @@ function App() {
   // check if there is a value in currentUser & token to gage what NavBar should look like.
 
   return (
-    <UserContext.Provider value = {currentUser, setCurrentUser}>
+    <UserContext.Provider value = {{currentUser, setCurrentUser, handleApply, didUserPreviouslyApply}}>
       <div className="App">
-          <NavRoutes createAccount = {createAccount} login = {login} handleApply = {handleApply}/>
+          <NavRoutes createAccount = {createAccount} login = {login}/>
           <NavBar logout = {logout}/>
       </div>
     </UserContext.Provider>
-  );
+  ); 
 };
 
 export default App;
