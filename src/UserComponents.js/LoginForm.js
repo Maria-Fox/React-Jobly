@@ -35,11 +35,11 @@ const LoginForm = ({login}) => {
       } else {
         setErrors(response);
         console.log(errors);
-      }
+      };
     } catch (e) {
       console.log(e);
-    }
-  }
+    };
+  };
 
   return(
     <div>

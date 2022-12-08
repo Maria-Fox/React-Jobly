@@ -5,7 +5,7 @@ Filtering companies does a hard refresh. Unable to get the rendered version of t
 URL looks correct: http://localhost:3000/companies?searchTerm=aria
 How is "searchTerm" key being rendered if I'm sending in "q"?
 
-To recreate: please complete searcch form at the top of CompanyList.js
+To recreate: please complete the search form at the top of CompanyList.js
 
 ##Step 6: 
 
@@ -16,3 +16,5 @@ To recreate : please activate lines 7 & 22 active in App.js. currently commented
 ###Step 7:
 
 Unsure how Springboard protected the routes. My version is seen on CompanyList.js & Profile.js. I essentially just check to see if there's a currentUser in state and navigate elsewhere if not. I have not protected the other routes bc I need to correct step 6 to hold the token in state and add to localStorage. 
+
+I think it's what we're running when the inital App.js effect runs checking for token. If no token there's no auth to go anywhere. Is this correct? If so, how does it know to route elsewhere? Is our backend working through Next's?

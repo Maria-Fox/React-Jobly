@@ -8,7 +8,7 @@ import UserContext from './UserComponents.js/UserContext';
 // gives me polyfill error???
 import useLocalStorage from './Hooks/useLocalStorage';
 
-export const jobly_token = "jobly-token-key"
+export const jobly_token = "jobly-token-key";
 
 function App() {
 
@@ -20,16 +20,17 @@ function App() {
 // ***************************************************************
 
   useEffect(function loadUserInfo() {
-
+    console.log("hello")
+    console.log(token)
     async function getCurrentUser() {
+      if(token){
         try {
           // token pyload is the username and isAdmin prop
           // let { username } = jwt.decode(token);
           // add token to Api class so it can be used to call the API.
           JoblyApi.token = token;
-          // hard coding in newnew as it was a user created in my db.
+          // ****hard coding in newnew as it was a user created in my db.
           let currentUser = await JoblyApi.getUsername("newnew");
-          console.log("this is the current user:", currentUser)
           setCurrentUser(currentUser);
           console.log("current user is :", currentUser);
           console.log(token);
@@ -38,11 +39,10 @@ function App() {
           console.error("App loadUserInfo: problem loading", e);
           setCurrentUser(null);
         }
+    } else {
+      console.log("no token found")
     }
-
-    if(token){
-      getCurrentUser();
-    }
+    } getCurrentUser();
   }, [token]);
 
 // ***************************************************************
