@@ -6,11 +6,15 @@ import JoblyApi from './JoblyAPI';
 import UserContext from './UserComponents.js/UserContext';
 // import jwt from "jsonwebtoken";
 // gives me polyfill error???
+import useLocalStorage from './Hooks/useLocalStorage';
+
+export const jobly_token = "jobly-token-key"
 
 function App() {
 
   let [currentUser, setCurrentUser] = useState(null);
-  let [token, setToken] = useState(null);
+  // hooked into state + local storage.
+  let [token, setToken] = useLocalStorage(jobly_token);
   // for children components that use the context :
   // let user = useContext(UserContext);
 
