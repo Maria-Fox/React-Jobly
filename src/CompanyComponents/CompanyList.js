@@ -1,21 +1,33 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
+import {useNavigate} from "react-router-dom";
 import JoblyApi from "../JoblyAPI";
 import CompanyCard from "./CompanyCard";
-// import UUID for a new 
+import UserContext from "../UserComponents.js/UserContext";
 
 // need to take in companies.sending reqto backend?
 const CompanyList = () => {
 
   let [companies, setCompanies] = useState([]);
   let [searchTerm, setSearchTerm] = useState("");
+  let {currentUser , setCurrentUser } = useContext(UserContext);
+  let navigate = useNavigate();
 
   useEffect(function requestCompanies() {
+
     async function getAllCompanies() {
-      // use the API helper class here & reassign the companies state
-      setCompanies(await JoblyApi.getCompanies());
+      try {
+          setCompanies(await JoblyApi.getCompanies());
+        } catch(e){
+        console.log(e)
+      }
     }
-    getAllCompanies();
-  }, []);
+
+    if(currentUser){
+      getAllCompanies();
+    } else {
+      navigate("/login")
+    }
+  }, [currentUser]);
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
