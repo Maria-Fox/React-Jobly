@@ -1,19 +1,18 @@
-#Step 4:
+# Step 4:
 
 Filtering companies does a hard refresh. Unable to get the rendered version of the API response w/ query filters.
 
+Is it re-rendering bc the currentUser is not authe'd yet? That is the only thing to cause a rerender. needs addressing.
+
 URL looks correct: http://localhost:3000/companies?searchTerm=aria
-How is "searchTerm" key being rendered if I'm sending in "q"?
 
 To recreate: please complete the search form at the top of CompanyList.js
 
-##Step 6: 
+## Step 6: 
 
-Imported JSON Web Tokens to decode the token received from the backend when registering or signing in. I am seeing a pollyfill error. Need the token to assign payload to the currentUser piece of state // use throughout the app.
+Unable to decode the JWT received when a user signs up /logs in. Nee dto destructure token to assign into state and confirm there's a valid user accessing protecting sites.
 
-To recreate : please activate lines 7 & 22 active in App.js. currently commented out.
-
-###Step 7:
+### Step 7:
 
 Unsure how Springboard protected the routes. My version is seen on CompanyList.js & Profile.js. I essentially just check to see if there's a currentUser in state and navigate elsewhere if not. I have not protected the other routes bc I need to correct step 6 to hold the token in state and add to localStorage. 
 

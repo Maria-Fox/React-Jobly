@@ -4,8 +4,7 @@ import NavBar from './NavBar';
 import NavRoutes from './NavRoutes';
 import JoblyApi from './JoblyAPI';
 import UserContext from './UserComponents.js/UserContext';
-// import jwt from "jsonwebtoken";
-// gives me polyfill error???
+import { decodeToken } from "react-jwt";
 import useLocalStorage from './Hooks/useLocalStorage';
 
 export const jobly_token = "jobly-token-key";
@@ -21,12 +20,14 @@ function App() {
 
   useEffect(function loadUserInfo() {
     console.log("hello")
-    console.log(token)
+    console.log("token is", token)
     async function getCurrentUser() {
       if(token){
         try {
-          // token pyload is the username and isAdmin prop
-          // let { username } = jwt.decode(token);
+          console.log("Valid token", token)
+          // token payload is the username and isAdmin prop. Destructure.
+          const  username  = decodeToken(token);          
+          console.log("username is", username);
           // add token to Api class so it can be used to call the API.
           JoblyApi.token = token;
           // ****hard coding in newnew as it was a user created in my db.
@@ -34,16 +35,18 @@ function App() {
           setCurrentUser(currentUser);
           console.log("current user is :", currentUser);
           console.log(token);
-          // setApplicationIds(new Set(currentUser.applications));
+          setAppliedJobs(new Set(currentUser.applications));
         } catch (e) {
           console.error("App loadUserInfo: problem loading", e);
           setCurrentUser(null);
+          return {message: "Unauthorized"};
         }
     } else {
       console.log("no token found")
     }
     } getCurrentUser();
   }, [token]);
+
 
 // ***************************************************************
 
@@ -72,7 +75,6 @@ function App() {
       console.log(e);
       return {success: false, e};
     }
-    
   };
 
 // ***************************************************************

@@ -61,7 +61,6 @@ const JobList = () => {
     <div>
       {searchBar}
 
-      <p>This is the job list</p>
       {jobList ? jobList.map(({id, title, salary, equity, companyHandle, companyName}) => 
         <JobCard 
         key = {id} 

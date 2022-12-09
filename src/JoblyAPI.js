@@ -43,7 +43,8 @@ class JoblyApi {
 //  * - maxEmployees
 //  * - nameLike (will find case-insensitive, partial matches)
 
-  static async getCompanies(data = {}) {
+// data = {searchTerm} // the filters passed into searchForm.
+  static async getCompanies(data) {
     let res = await this.request(`companies/`, data);
     return res.companies;
   };
