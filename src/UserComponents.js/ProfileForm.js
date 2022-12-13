@@ -22,11 +22,7 @@ const ProfileForm = () => {
     console.log("mounted")
 
     async function getUser() {
-      if(currentUser){
-        // do this
-        console.log("effect 1")
-      } else {
-        console.log("effect 2")
+      if(!currentUser){
         navigate("/login")
       }
     } 

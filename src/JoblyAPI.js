@@ -82,7 +82,7 @@ class JoblyApi {
 
   static async getUsername(username) {
     let res = await this.request(`users/${username}`);
-    console.log(res);
+    console.log(res.user);
     return res.user;
   };
 
@@ -95,7 +95,7 @@ class JoblyApi {
   static async signIn(data) {
     let res = await this.request(`auth/token`, data, "post");
     console.log(res);
-    return res;
+    return res.token;
   };
 
   static async updateProfile(username, data) {

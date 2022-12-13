@@ -1,8 +1,18 @@
-import React, {useEffect, useState} from "react";
-import { Link } from "react-router-dom"
+import React, {useEffect, useState, useContext} from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import JoblyApi from "../JoblyAPI";
+import UserContext from "../UserComponents.js/UserContext";
 
 const CompanyCard = ({handle, name, description, numEmployees}) => {
+
+  let navigate = useNavigate();
+  let {currentUser} = useContext(UserContext);
+
+  useEffect(function testAuth () {
+    if(!currentUser){
+      Navigate("/login")
+    }
+  })
 
   return(
     <div>

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import CompanyCard from "../CompanyComponents/CompanyCard";
 import UserContext from "../UserComponents.js/UserContext";
 
@@ -7,10 +7,11 @@ const JobCard = ({companyHandle, companyName, equity, id, salary, title}) => {
 
   let [applied, setApplied] = useState(new Set([]));
 
-  let {handleApply, didUserPreviouslyApply} = useContext(UserContext);
+  let {currentUser, handleApply, didUserPreviouslyApply} = useContext(UserContext);
 
   useEffect(
     function checkIfApplied() {
+      if(!currentUser) Navigate("/login");
       setApplied(didUserPreviouslyApply(id));
     },
     [id, didUserPreviouslyApply]

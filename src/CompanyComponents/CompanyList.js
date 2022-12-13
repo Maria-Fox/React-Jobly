@@ -13,8 +13,10 @@ const CompanyList = () => {
   let navigate = useNavigate();
 
   useEffect(function requestCompanies() {
+    console.log("in companies this is the current user:", currentUser)
 
     async function getAllCompanies() {
+      if(!currentUser) navigate("/login");
       try {
           setCompanies(await JoblyApi.getCompanies());
         } catch(e){
@@ -22,12 +24,7 @@ const CompanyList = () => {
       }
     }
 
-    // REMOVE THE ! - ONLY NEGATING TO CONTINUE DEV 
-    if(!currentUser){
-      getAllCompanies();
-    } else {
-      navigate("/login")
-    }
+    getAllCompanies();
   }, [currentUser]);
 
   const handleChange = (e) => {
@@ -37,15 +34,13 @@ const CompanyList = () => {
 
   // {searchFor} creates query structure in URL bar.
   async function handleSubmit (e, {searchFor}) {
-      e.preventDefault();
-      console.log("submit form");
-      console.log(searchTerm, typeof searchFor)
+    e.preventDefault();
       try {
         // sending as object to fit data structure in route
         let companies = await JoblyApi.getCompanies(searchTerm);
         console.log(companies)
         setCompanies(companies)
-        console.log(("new coms", companies));
+        console.log(("new comps", companies));
       } catch (e){
         console.log(e);
       }

@@ -12,32 +12,29 @@ export const jobly_token = "jobly-token-key";
 function App() {
 
   let [currentUser, setCurrentUser] = useState(null);
-  // hooked into state + local storage.
-  let [token, setToken] = useLocalStorage(jobly_token);
+  // token is hooked into state + local storage.
+  let [token, setToken] = useLocalStorage();
   let [appliedJobs , setAppliedJobs] = useState(new Set([]));
 
 // ***************************************************************
 
   useEffect(function loadUserInfo() {
     console.log("hello")
-    console.log("token is", token)
     async function getCurrentUser() {
       if(token){
         try {
           console.log("Valid token", token)
           // token payload is the username and isAdmin prop. Destructure.
-          const  username  = decodeToken(token);          
-          console.log("username is", username);
-          // add token to Api class so it can be used to call the API.
+          const {username}  = decodeToken(token);          
+         // add token to Api class so it can be used to call the API.
           JoblyApi.token = token;
-          // ****hard coding in newnew as it was a user created in my db.
-          let currentUser = await JoblyApi.getUsername("newnew");
-          setCurrentUser(currentUser);
-          console.log("current user is :", currentUser);
-          console.log(token);
-          setAppliedJobs(new Set(currentUser.applications));
+          let response = await JoblyApi.getUsername(username);
+          const { applications } = response;
+          setCurrentUser(response);
+          setAppliedJobs(new Set(applications));
+          console.log(currentUser, "is the current user")
         } catch (e) {
-          console.error("App loadUserInfo: problem loading", e);
+          console.error("ApploadUserInfo: problem loading", e);
           setCurrentUser(null);
           return {message: "Unauthorized"};
         }
@@ -66,10 +63,14 @@ function App() {
 // ***************************************************************
 
   async function login(userCreds) {
-    console.log(userCreds);
     try{
       let loginToken = await JoblyApi.signIn(userCreds);
+      console.log(loginToken)
       setToken(loginToken);
+      let {username} = decodeToken(loginToken);
+      console.log("the user should be ", username);
+      setCurrentUser(username)
+      console.log("currentUser is now: ", currentUser)
       return {success : true};
     } catch(e){
       console.log(e);

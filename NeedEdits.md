@@ -10,10 +10,6 @@ To recreate: please complete the search form at the top of CompanyList.js
 
 ## Step 6: 
 
-Unable to decode the JWT received when a user signs up /logs in. Nee dto destructure token to assign into state and confirm there's a valid user accessing protecting sites.
+For some reason line 72 in App.js is not setting a new user to state.
+      setCurrentUser(username)
 
-### Step 7:
-
-Unsure how Springboard protected the routes. My version is seen on CompanyList.js & Profile.js. I essentially just check to see if there's a currentUser in state and navigate elsewhere if not. I have not protected the other routes bc I need to correct step 6 to hold the token in state and add to localStorage. 
-
-I think it's what we're running when the inital App.js effect runs checking for token. If no token there's no auth to go anywhere. Is this correct? If so, how does it know to route elsewhere? Is our backend working through Next's?

@@ -2,15 +2,18 @@ import React, {useState, useEffect, useContext} from "react";
 import JoblyApi from "../JoblyAPI";
 import JobCard from "./JobCard";
 import UserContext from "../UserComponents.js/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const JobList = () => {
 
   let [jobList, setJobList] = useState(null);
   let [searchTerm, setSearchTerm] = useState("");
   let {currentUser} = useContext(UserContext);
+  let navigate = useNavigate();
 
   useEffect(function requestAllJobs () {
     console.log("mount");
+    if(!currentUser) navigate("/login")
     async function getAllJobs(){
       // setJobList(await JoblyApi.getJobs());
 

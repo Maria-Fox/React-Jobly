@@ -1,7 +1,7 @@
 
 
 import React, {useEffect, useState, useContext} from "react";
-import {useParams} from "react-router-dom";
+import {useParams,useNavigate} from "react-router-dom";
 import JoblyApi from "../JoblyAPI";
 import UserContext from "../UserComponents.js/UserContext";
 import JobCard from "../JobComponents/JobCard";
@@ -11,10 +11,14 @@ const CompanyDetails = () => {
   let [targetCompany, setTargetCompany] = useState(null);
   let {currentUser, handleApply, didUserPreviouslyApply} = useContext(UserContext);
 
+  let navigate = useNavigate();
+
   let companyHandle = useParams();
   companyHandle = companyHandle.handle;
 
   useEffect(function requestCompDetails() {
+    if(!currentUser) navigate("/login");
+
     async function getCompDetails () {
       
       let company = await JoblyApi.getCompany(companyHandle);
