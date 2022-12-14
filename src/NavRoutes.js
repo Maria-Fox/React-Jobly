@@ -2,7 +2,6 @@ import React, {useContext} from "react";
 import {Routes, Route} from "react-router-dom"; 
 import WelcomePage from "./WelcomePage";
 import CompanyList from "./CompanyComponents/CompanyList";
-import CompanyCard from "./CompanyComponents/CompanyCard";
 import CompanyDetails from "./CompanyComponents/CompanyDetails"
 import JobList from "./JobComponents/JobList";
 import SignupForm from "./UserComponents.js/SignupForm";
@@ -10,7 +9,7 @@ import LoginForm from "./UserComponents.js/LoginForm";
 import Profile from "./UserComponents.js/ProfileForm";
 import UserContext from "./UserComponents.js/UserContext";
 
-const NavRoutes = ({createAccount, login, handleApply}) => {
+const NavRoutes = ({createAccount, login}) => {
   let {currentUser} = useContext(UserContext);
   console.log(currentUser, "from NavRoutes pg");
   

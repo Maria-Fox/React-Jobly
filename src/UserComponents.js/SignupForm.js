@@ -16,6 +16,8 @@ const SignupForm = ({createAccount}) => {
   let [formData, setFormData] = useState(initial_state);
   let [errors, setErrors] = useState(null);
 
+  // ***************************************************************
+
   let handleChange = (e) => {
     let {name, value} = e.target;
     setFormData(formData => ({
@@ -23,6 +25,8 @@ const SignupForm = ({createAccount}) => {
       [name]:value
     }))
   };
+
+  // ***************************************************************
 
   async function handleSubmit (e) {
     e.preventDefault();
@@ -43,12 +47,16 @@ const SignupForm = ({createAccount}) => {
     };
   };
 
+  // ***************************************************************
+
   let printErrors = () => {
     let errorToPrint = errors.e[0];
     return(
         <h2>{errorToPrint}</h2>
       )
   }  
+
+  // ***************************************************************
 
   return(
     <div>

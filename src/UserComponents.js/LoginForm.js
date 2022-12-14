@@ -15,6 +15,8 @@ const LoginForm = ({login}) => {
   let [formData, setFormData] = useState(initial_state);
   let [errors, setErrors] = useState(null);
 
+  // ***************************************************************
+
   let handleChange = (e) => {
     let {name, value} = e.target;
     setFormData(formData => ({
@@ -22,6 +24,8 @@ const LoginForm = ({login}) => {
       [name]:value
     }))
   };
+
+  // ***************************************************************
 
   async function handleSubmit (e) {
     e.preventDefault();
@@ -41,6 +45,8 @@ const LoginForm = ({login}) => {
     };
   };
 
+  // ***************************************************************
+
   let printErrors = () => {
     let errorToPrint = errors.e[0];
     return(
@@ -48,7 +54,7 @@ const LoginForm = ({login}) => {
       )
   }
   
-  
+  // ***************************************************************
 
   return(
     <div>

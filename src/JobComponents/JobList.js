@@ -11,6 +11,8 @@ const JobList = () => {
   let {currentUser} = useContext(UserContext);
   let navigate = useNavigate();
 
+  // ***************************************************************
+
   useEffect(function requestAllJobs () {
     console.log("mount");
     if(!currentUser) navigate("/login")
@@ -26,6 +28,8 @@ const JobList = () => {
     getAllJobs();
   }, []);
 
+  // ***************************************************************
+
   let handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -39,6 +43,8 @@ const JobList = () => {
       console.log(e);
     }
   };
+
+  // ***************************************************************
 
   let searchBar = <div>
     <form htmlFor = "searchTerm" >
@@ -59,6 +65,7 @@ const JobList = () => {
     </form>
   </div>
 
+  // ***************************************************************
 
   return(
     <div>

@@ -18,6 +18,8 @@ const ProfileForm = () => {
   let {currentUser, setCurrentUser} = useContext(UserContext);
   let navigate = useNavigate();
 
+  // ***************************************************************
+
   useEffect(function confirmUser(){
     console.log("mounted")
 
@@ -37,6 +39,8 @@ const ProfileForm = () => {
     }))
   }
 
+  // ***************************************************************
+
   async function handleSubmit(e) {
     e.preventDefault();
     console.log(formData)
@@ -51,6 +55,8 @@ const ProfileForm = () => {
     }
   }
 
+  // ***************************************************************
+
   let printErrors = () => {
     let errorToPrint = errors.e[0];
     return(
@@ -58,6 +64,7 @@ const ProfileForm = () => {
       )
   }
   
+// ***************************************************************
 
   return(
     <div>

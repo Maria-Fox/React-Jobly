@@ -12,6 +12,8 @@ const CompanyList = () => {
   let {currentUser , setCurrentUser } = useContext(UserContext);
   let navigate = useNavigate();
 
+  // ***************************************************************
+
   useEffect(function requestCompanies() {
     console.log("in companies this is the current user:", currentUser)
 
@@ -26,6 +28,8 @@ const CompanyList = () => {
 
     getAllCompanies();
   }, [currentUser]);
+
+  // ***************************************************************
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -46,6 +50,7 @@ const CompanyList = () => {
       }
   };
 
+  // ***************************************************************
 
   let searchBar = <div>
     <form htmlFor = "searchTerm" onSubmit = {handleSubmit}>
@@ -66,6 +71,7 @@ const CompanyList = () => {
     </form>
   </div>
 
+  // ***************************************************************
 
   return(
     

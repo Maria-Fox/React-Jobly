@@ -7,12 +7,17 @@ const CompanyCard = ({handle, name, description, numEmployees}) => {
 
   let navigate = useNavigate();
   let {currentUser} = useContext(UserContext);
+  
+  // ***************************************************************
+
 
   useEffect(function testAuth () {
     if(!currentUser){
       navigate("/login")
     }
   })
+
+  // ***************************************************************
 
   return(
     <div>

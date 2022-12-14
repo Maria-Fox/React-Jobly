@@ -16,6 +16,9 @@ const CompanyDetails = () => {
   let companyHandle = useParams();
   companyHandle = companyHandle.handle;
 
+  // ***************************************************************
+
+
   useEffect(function requestCompDetails() {
     if(!currentUser) navigate("/login");
 
@@ -29,6 +32,9 @@ const CompanyDetails = () => {
   }, [companyHandle]);
 
   // i am returning a JobCard vs. JobList bc the JobList will send another API request, this component already does that. Additionally, it means styling on the JobCard alone instead of multiple places.
+
+  // ***************************************************************
+
   return(
     <div>
       <p>details here</p>

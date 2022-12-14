@@ -4,7 +4,7 @@ import UserContext from "./UserComponents.js/UserContext";
 
 const NavBar = ({logout}) => {
 
-  // holds a valid user object.
+  // holds a valid user object. If it exsits will determine which nav user sees.
   let {currentUser} = useContext(UserContext);
 
   if(!currentUser){

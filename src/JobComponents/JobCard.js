@@ -6,8 +6,9 @@ import UserContext from "../UserComponents.js/UserContext";
 const JobCard = ({companyHandle, companyName, equity, id, salary, title}) => {
 
   let [applied, setApplied] = useState(new Set([]));
-
   let {currentUser, handleApply, didUserPreviouslyApply} = useContext(UserContext);
+
+  // ***************************************************************
 
   useEffect(
     function checkIfApplied() {
@@ -17,8 +18,12 @@ const JobCard = ({companyHandle, companyName, equity, id, salary, title}) => {
     [id, didUserPreviouslyApply]
   )
 
+  // ***************************************************************
+
   let equityUpdated = equity ? equity : "Unavailable";
   let buttonStyle = didUserPreviouslyApply(id) ? "applied" : "not-applied";
+
+  // ***************************************************************
 
   return(    
     <div>

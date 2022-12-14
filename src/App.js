@@ -23,7 +23,7 @@ function App() {
     async function getCurrentUser() {
       if(token){
         try {
-          console.log("Valid token", token)
+          // console.log("Valid token", token)
           // token payload is the username and isAdmin prop. Destructure.
           const {username}  = decodeToken(token);          
          // add token to Api class so it can be used to call the API.
@@ -32,9 +32,9 @@ function App() {
           const { applications } = response;
           setCurrentUser(response);
           setAppliedJobs(new Set(applications));
-          console.log(currentUser, "is the current user")
+          // console.log(currentUser, "is the current user")
         } catch (e) {
-          console.error("ApploadUserInfo: problem loading", e);
+          // console.error("ApploadUserInfo: problem loading", e);
           setCurrentUser(null);
           return {message: "Unauthorized"};
         }
@@ -51,7 +51,7 @@ function App() {
     // should include the new users username, password, firstName, lastName, email
     try {
       let newAccountToken = await JoblyApi.registerUser(userData);
-      console.log(newAccountToken);
+      // console.log(newAccountToken);
       setToken(newAccountToken);
       return {success : true}
     } catch (e) {
@@ -65,12 +65,11 @@ function App() {
   async function login(userCreds) {
     try{
       let loginToken = await JoblyApi.signIn(userCreds);
-      console.log(loginToken)
+      // console.log(loginToken)
       setToken(loginToken);
       let {username} = decodeToken(loginToken);
-      console.log("the user should be ", username);
       setCurrentUser(username)
-      console.log("currentUser is now: ", currentUser)
+      // console.log("currentUser is now: ", currentUser)
       return {success : true};
     } catch(e){
       console.log(e);
@@ -97,7 +96,6 @@ function App() {
       // otherwise, send the API request and then re-write state w/ new set.
     // hardcoding "newnew" as argument for currentUser.username 
       let applied = await JoblyApi.applyForJob(currentUser.username, jobId);
-      console.log(applied);
       setAppliedJobs(new Set([...appliedJobs, jobId]));
     } catch(err){
       console.log(err);
