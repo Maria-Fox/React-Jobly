@@ -94,9 +94,9 @@ function App() {
       // if the jobId is already in set return/ do not allow to apply
       if(didUserPreviouslyApply(jobId)) return;
 
-      // otherwise, send the API request and then re-write tate w/ new set.
+      // otherwise, send the API request and then re-write state w/ new set.
     // hardcoding "newnew" as argument for currentUser.username 
-      let applied = await JoblyApi.applyForJob("newnew", jobId);
+      let applied = await JoblyApi.applyForJob(currentUser.username, jobId);
       console.log(applied);
       setAppliedJobs(new Set([...appliedJobs, jobId]));
     } catch(err){

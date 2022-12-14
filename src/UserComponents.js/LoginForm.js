@@ -35,16 +35,26 @@ const LoginForm = ({login}) => {
         navigate("/companies");
       } else {
         setErrors(response);
-        console.log(errors);
       };
     } catch (e) {
       console.log(e);
     };
   };
 
+  let printErrors = () => {
+    let errorToPrint = errors.e[0];
+    return(
+        <h2>{errorToPrint}</h2>
+      )
+  }
+  
+  
+
   return(
     <div>
       <h1>Login</h1>
+
+      {errors ? printErrors() : ""}
 
       <form onSubmit = {handleSubmit}>
 

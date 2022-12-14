@@ -14,7 +14,7 @@ const SignupForm = ({createAccount}) => {
   }
 
   let [formData, setFormData] = useState(initial_state);
-  let [errors, setErrors] = useState([]);
+  let [errors, setErrors] = useState(null);
 
   let handleChange = (e) => {
     let {name, value} = e.target;
@@ -36,18 +36,25 @@ const SignupForm = ({createAccount}) => {
       if(response.success){
         navigate("/companies");
       } else {
-        // or response.e ?? but that wasn't working.
         setErrors(response);
-        console.log(errors);
       };
     } catch (e) {
-      return alert("Something went wrong- please try again later.")
-    }
-  }
+      console.log(e);
+    };
+  };
+
+  let printErrors = () => {
+    let errorToPrint = errors.e[0];
+    return(
+        <h2>{errorToPrint}</h2>
+      )
+  }  
 
   return(
     <div>
       <h1>Join Jobly, today!</h1>
+
+      {errors ? printErrors() : ""}
 
       <form onSubmit = {handleSubmit}>
 

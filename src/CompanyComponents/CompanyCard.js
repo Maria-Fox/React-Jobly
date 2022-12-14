@@ -10,7 +10,7 @@ const CompanyCard = ({handle, name, description, numEmployees}) => {
 
   useEffect(function testAuth () {
     if(!currentUser){
-      Navigate("/login")
+      navigate("/login")
     }
   })
 

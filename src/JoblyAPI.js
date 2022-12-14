@@ -45,6 +45,7 @@ class JoblyApi {
 
 // data = {searchTerm} // the filters passed into searchForm.
   static async getCompanies(data) {
+    console.log(data);
     let res = await this.request(`companies/`, data);
     return res.companies;
   };

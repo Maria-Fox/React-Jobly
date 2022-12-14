@@ -16,7 +16,7 @@ const CompanyList = () => {
     console.log("in companies this is the current user:", currentUser)
 
     async function getAllCompanies() {
-      if(!currentUser) navigate("/login");
+      // if(!currentUser) navigate("/login");
       try {
           setCompanies(await JoblyApi.getCompanies());
         } catch(e){
@@ -32,16 +32,16 @@ const CompanyList = () => {
     // console.log(searchTerm)
   };
 
-  // {searchFor} creates query structure in URL bar.
-  async function handleSubmit (e, {searchFor}) {
+  async function handleSubmit (e) {
     e.preventDefault();
-      try {
+    try {
         // sending as object to fit data structure in route
-        let companies = await JoblyApi.getCompanies(searchTerm);
+        console.log("the search term is ", {name: searchTerm})
+        let companies = await JoblyApi.getCompanies({name: searchTerm});
         console.log(companies)
         setCompanies(companies)
         console.log(("new comps", companies));
-      } catch (e){
+    } catch (e){
         console.log(e);
       }
   };
@@ -62,7 +62,7 @@ const CompanyList = () => {
         </input>
       </label>
 
-      <button>Search</button>
+      <button type = "submit">Search</button>
     </form>
   </div>
 

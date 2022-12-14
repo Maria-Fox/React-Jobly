@@ -51,13 +51,21 @@ const ProfileForm = () => {
     }
   }
 
+  let printErrors = () => {
+    let errorToPrint = errors.e[0];
+    return(
+        <h2>{errorToPrint}</h2>
+      )
+  }
+  
+
   return(
     <div>
       <h1>Edit Profile Details</h1>
 
-      <div>
-      <h1>Join Jobly, today!</h1>
+      {errors ? printErrors() : ""}
 
+      <div>
       <form onSubmit = {handleSubmit}>
 
 
@@ -109,7 +117,7 @@ const ProfileForm = () => {
         </label>
       </label>
 
-        <button>Join</button>
+        <button>Update</button>
 
       </form>
     </div>
